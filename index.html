@@ -3405,5 +3405,35 @@ Devuelve tu respuesta como un array de objetos JSON, donde cada objeto tiene las
             new BibleApp();
         });
     </script>
+<script>
+    async function consultarGemini(promptUsuario) {
+        const response = await fetch('/api/gemini', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: promptUsuario })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error del servidor: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data.result;
+    }
+
+    document.getElementById('ask-ai-btn')?.addEventListener('click', async () => {
+        const input = document.getElementById('qa-input').value.trim();
+        const container = document.getElementById('qa-results-container');
+        container.innerHTML = '<p class="loading">Consultando a la IA...</p>';
+
+        try {
+            const respuesta = await consultarGemini(input);
+            container.innerHTML = `<div class="analysis-card"><div class="card-content"><p>${respuesta}</p></div></div>`;
+        } catch (err) {
+            container.innerHTML = `<div class="error">Ocurrió un error: ${err.message}</div>`;
+        }
+    });
+</script>   
 </body>
 </html>
+
