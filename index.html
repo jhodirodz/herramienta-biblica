@@ -944,13 +944,12 @@
 
             // Initializes the application state and event listeners
             init() {
-                this.initializeFirebase(); // Initialize Firebase first
-                this.initializeGlobalControls();
-                this.generateReadingPlans();
-                // Populate book select initially
-                this.BIBLE_BOOKS.forEach((book, index) => this.dom.bookSelect.add(new Option(book.name, index)));
-                this.addEventListeners(); // Add event listeners after DOM is ready and Firebase is being initialized
-            }
+    this.initializeFirebase(); 
+    this.generateReadingPlans();
+    // populate book select initially...
+    this.BIBLE_BOOKS.forEach((book, index) => this.dom.bookSelect.add(new Option(book.name, index)));
+    this.addEventListeners(); 
+}
 
             // Initializes Firebase and handles authentication
             async initializeFirebase() {
@@ -1002,20 +1001,24 @@
 
             // Loads all user data from Firestore once authenticated
             async loadAllUserData() {
-                if (!this.isAuthReady || !this.userId) {
-                    console.warn("Firebase no está listo o userId no está disponible para cargar datos.");
-                    return;
-                }
-                console.log("Cargando todos los datos del usuario...");
-                await this.loadSavedStudiesFromFirestore();
-                await this.loadUsedDevotionalReferences();
-                await this.loadLastTeachingStudy();
-                this.populatePlanSelector(); // Ensure plans are generated first
-                const selectedPlan = this.dom.readingPlanSelect.value;
-                if (selectedPlan) {
-                    this.renderReadingPlan(selectedPlan);
-                }
-            }
+    if (!this.isAuthReady || !this.userId) {
+        console.warn("Firebase no está listo...");
+        return;
+    }
+    console.log("Cargando todos los datos del usuario...");
+    await this.loadSavedStudiesFromFirestore();
+    await this.loadUsedDevotionalReferences();
+    await this.loadLastTeachingStudy();
+
+    // ---> AGREGA ESTA LÍNEA AQUÍ <---
+    await this.initializeGlobalControls(); 
+
+    this.populatePlanSelector(); 
+    const selectedPlan = this.dom.readingPlanSelect.value;
+    if (selectedPlan) {
+        this.renderReadingPlan(selectedPlan);
+    }
+}
 
             // Helper for API calls with exponential backoff
             async fetchWithRetry(url, options, retries = 3, delay = 1000) {
