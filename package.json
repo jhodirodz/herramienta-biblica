@@ -1,0 +1,12 @@
+{
+  "name": "herramienta-biblica",
+  "version": "1.0.0",
+  "description": "App de estudio bíblico",
+  "main": "index.html",
+  "scripts": {
+    "start": "node api/gemini.js"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
