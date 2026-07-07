@@ -1598,11 +1598,12 @@
                     const prompt = `Devuelve única y exclusivamente el texto bíblico para la referencia "${ref}" de la versión King James en español, sin ninguna frase introductoria. Responde únicamente en español.`;
                     const geminiPayload = { contents: [{ parts: [{ text: prompt }] }] };
                     
-                    const data = await this.fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(geminiPayload)
-                    });
+                    // CÓDIGO CORREGIDO (APLICA A TODOS LOS fetchWithRetry)
+const data = await this.fetchWithRetry(`/api/gemini`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(geminiPayload) // Mantén la variable que ya estaba aquí
+});
                     const text = data.candidates[0].content.parts[0].text;
                     this.dom.modalBody.innerHTML = `<p>${text}</p>`;
                 } catch (error) {
@@ -1620,11 +1621,12 @@
                     const prompt = `Devuelve única y exclusivamente el texto bíblico para la referencia "${reference}" de la versión King James en español, sin ninguna frase introductoria. Responde únicamente en español.`;
                     const geminiPayload = { contents: [{ parts: [{ text: prompt }] }] };
                     
-                    const data = await this.fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(geminiPayload)
-                    });
+                    // CÓDIGO CORREGIDO (APLICA A TODOS LOS fetchWithRetry)
+const data = await this.fetchWithRetry(`/api/gemini`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(geminiPayload) // Mantén la variable que ya estaba aquí
+});
                     const text = data.candidates[0].content.parts[0].text;
                     this.dom.modalBody.innerHTML = `<p>${text}</p>`;
                 } catch (error) {
@@ -2533,11 +2535,12 @@
 **REGLA CRÍTICA**: Cada vez que cites una referencia bíblica (ej. [[Juan 3:16]]) en CUALQUIER campo de texto, debes envolverla en dobles corchetes. Esto es esencial para la funcionalidad.
 La pregunta es: "${question}". Responde únicamente en español.`;
                 try {
-                    const data = await this.fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                    });
+                    // CÓDIGO CORREGIDO (APLICA A TODOS LOS fetchWithRetry)
+const data = await this.fetchWithRetry(`/api/gemini`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(geminiPayload) // Mantén la variable que ya estaba aquí
+});
                     const responseText = data.candidates[0].content.parts[0].text;
                     this.dom.qaResultsContainer.innerHTML = `<div class="analysis-card"><div class="card-header"><h4>Respuesta de la IA <button class="copy-btn" data-copy-target="qa-response">Copiar</button></h4></div><div class="card-content" id="qa-response" style="white-space: pre-wrap;">${this.makeCitationsClickable(responseText)}</div></div>`;
                 } catch (error) {
@@ -2557,11 +2560,12 @@ La pregunta es: "${question}". Responde únicamente en español.`;
 **REGLA CRÍTICA**: Cada vez que cites una referencia bíblica (ej. [[Juan 3:16]]) en CUALQUIER campo de texto, debes envolverla en dobles corchetes. Esto es esencial para la funcionalidad.
 Responde únicamente en español.`;
                 try {
-                    const data = await this.fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                    });
+                    // CÓDIGO CORREGIDO (APLICA A TODOS LOS fetchWithRetry)
+const data = await this.fetchWithRetry(`/api/gemini`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(geminiPayload) // Mantén la variable que ya estaba aquí
+});
                     const responseText = data.candidates[0].content.parts[0].text;
                     this.dom.dictionaryResultsContainer.innerHTML = `<div class="analysis-card"><div class="card-header"><h4>Definición de "${word}" <button class="copy-btn" data-copy-target="dictionary-definition">Copiar</button></h4></div><div class="card-content" id="dictionary-definition" style="white-space: pre-wrap;">${this.makeCitationsClickable(responseText)}</div></div>`;
                 } catch (error) {
@@ -2621,11 +2625,12 @@ Devuelve tu respuesta ÚNICAMENTE como un objeto JSON. La clave principal debe s
                         generationConfig: { responseMimeType: "application/json", responseSchema: schema }
                     };
 
-                    const data = await this.fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(geminiPayload)
-                    });
+                    // CÓDIGO CORREGIDO (APLICA A TODOS LOS fetchWithRetry)
+const data = await this.fetchWithRetry(`/api/gemini`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(geminiPayload) // Mantén la variable que ya estaba aquí
+});
 
                     const thematicAnalysisData = JSON.parse(data.candidates[0].content.parts[0].text).thematic_analysis;
 
@@ -2698,11 +2703,12 @@ Devuelve tu respuesta ÚNICAMENTE como un objeto JSON con la clave 'qa_pairs', u
                         generationConfig: { responseMimeType: "application/json", responseSchema: schema }
                     };
 
-                    const data = await this.fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(geminiPayload)
-                    });
+                    // CÓDIGO CORREGIDO (APLICA A TODOS LOS fetchWithRetry)
+const data = await this.fetchWithRetry(`/api/gemini`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(geminiPayload) // Mantén la variable que ya estaba aquí
+});
 
                     if (!data.candidates || !data.candidates[0] || !data.candidates[0].content || !data.candidates[0].content.parts || !data.candidates[0].content.parts[0].text) {
                         throw new Error("La respuesta de la IA no tuvo el formato esperado.");
@@ -2771,11 +2777,12 @@ Devuelve tu respuesta ÚNICAMENTE como un objeto JSON con la clave 'occurrences'
                         generationConfig: { responseMimeType: "application/json", responseSchema: schema }
                     };
 
-                    const data = await this.fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(geminiPayload)
-                    });
+                    // CÓDIGO CORREGIDO (APLICA A TODOS LOS fetchWithRetry)
+const data = await this.fetchWithRetry(`/api/gemini`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(geminiPayload) // Mantén la variable que ya estaba aquí
+});
                     const occurrencesData = JSON.parse(data.candidates[0].content.parts[0].text).occurrences;
 
                     let occurrencesHtml = `<div class="analysis-card"><div class="card-header"><h4>Resultados de concordancia para "${word}" <button class="copy-btn" data-copy-target="concordance-results">Copiar</button></h4></div><div class="card-content" id="concordance-results"><ul>`;
@@ -3120,11 +3127,12 @@ Devuelve tu respuesta ÚNICAMENTE como un array de dos objetos JSON. Cada objeto
                         generationConfig: { responseMimeType: "application/json", responseSchema: schema }
                     };
 
-                    const data = await this.fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(geminiPayload)
-                    });
+                    // CÓDIGO CORREGIDO (APLICA A TODOS LOS fetchWithRetry)
+const data = await this.fetchWithRetry(`/api/gemini`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(geminiPayload) // Mantén la variable que ya estaba aquí
+});
 
                     const parsedData = JSON.parse(data.candidates[0].content.parts[0].text);
                     
@@ -3158,11 +3166,12 @@ Devuelve tu respuesta ÚNICAMENTE como un array de dos objetos JSON. Cada objeto
 Devuelve tu respuesta como un texto bien formateado con títulos para cada sección. Responde únicamente en español.`;
 
                 try {
-                    const data = await this.fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                    });
+                    // CÓDIGO CORREGIDO (APLICA A TODOS LOS fetchWithRetry)
+const data = await this.fetchWithRetry(`/api/gemini`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(geminiPayload) // Mantén la variable que ya estaba aquí
+});
                     const responseText = data.candidates[0].content.parts[0].text;
                     this.dom.genericModalBody.innerHTML = this.makeCitationsClickable(responseText.replace(/\n/g, '<br>'));
                 } catch (error) {
@@ -3186,11 +3195,12 @@ Proporciona ilustraciones claras, concisas y fáciles de entender. Pueden ser hi
 Responde únicamente en español.`;
 
                 try {
-                    const data = await this.fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                    });
+                    // CÓDIGO CORREGIDO (APLICA A TODOS LOS fetchWithRetry)
+const data = await this.fetchWithRetry(`/api/gemini`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(geminiPayload) // Mantén la variable que ya estaba aquí
+});
                     const responseText = data.candidates[0].content.parts[0].text;
                     this.dom.genericModalBody.innerHTML = this.makeCitationsClickable(responseText.replace(/\n/g, '<br>'));
                 } catch (error) {
@@ -3219,11 +3229,12 @@ El diálogo debe reflejar los posibles pensamientos, miedos, esperanzas o luchas
 Responde únicamente en español.`;
 
                 try {
-                    const data = await this.fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                    });
+                    // CÓDIGO CORREGIDO (APLICA A TODOS LOS fetchWithRetry)
+const data = await this.fetchWithRetry(`/api/gemini`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(geminiPayload) // Mantén la variable que ya estaba aquí
+});
                     const responseText = data.candidates[0].content.parts[0].text;
                     this.dom.genericModalBody.innerHTML = this.makeCitationsClickable(responseText.replace(/\n/g, '<br>'));
                 } catch (error) {
@@ -3256,11 +3267,12 @@ Devuelve tu respuesta como un array de objetos JSON, donde cada objeto tiene las
                 };
 
                 try {
-                    const data = await this.fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: "application/json", responseSchema: schema } })
-                    });
+                    // CÓDIGO CORREGIDO (APLICA A TODOS LOS fetchWithRetry)
+const data = await this.fetchWithRetry(`/api/gemini`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(geminiPayload) // Mantén la variable que ya estaba aquí
+});
                     const timelineData = JSON.parse(data.candidates[0].content.parts[0].text);
 
                     let timelineHtml = '<div class="timeline">';
@@ -3410,7 +3422,10 @@ Devuelve tu respuesta como un array de objetos JSON, donde cada objeto tiene las
         const response = await fetch('/api/gemini', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: promptUsuario })
+            // Estructuramos el body como lo espera Gemini de forma nativa
+            body: JSON.stringify({ 
+                contents: [{ parts: [{ text: promptUsuario }] }] 
+            })
         });
 
         if (!response.ok) {
@@ -3418,7 +3433,8 @@ Devuelve tu respuesta como un array de objetos JSON, donde cada objeto tiene las
         }
 
         const data = await response.json();
-        return data.result;
+        // Extraemos el texto de la misma forma que lo hacen las otras funciones
+        return data.candidates[0].content.parts[0].text;
     }
 
     document.getElementById('ask-ai-btn')?.addEventListener('click', async () => {
